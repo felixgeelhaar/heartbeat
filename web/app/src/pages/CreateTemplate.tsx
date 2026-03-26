@@ -8,6 +8,19 @@ interface MetricFormState {
   description_bad: string
 }
 
+const SPOTIFY_METRICS: MetricFormState[] = [
+  { name: 'Easy to Release', description_good: 'Releasing is simple, safe, painless & mostly automated', description_bad: 'Releasing is risky, painful, lots of manual work, and takes forever' },
+  { name: 'Suitable Process', description_good: 'Our way of working fits us perfectly', description_bad: 'Our way of working sucks' },
+  { name: 'Tech Quality', description_good: "We're proud of the quality of our code! It is clean, easy to read, and has great test coverage", description_bad: 'Our code is a pile of dung, and technical debt is raging out of control' },
+  { name: 'Value', description_good: "We deliver great stuff! We're proud of it and our stakeholders are really happy", description_bad: 'We deliver crap. We feel ashamed to deliver it. Our stakeholders hate us' },
+  { name: 'Speed', description_good: 'We get stuff done really quickly. No waiting, no delays', description_bad: 'We never seem to get done with anything. Stories keep getting stuck on dependencies' },
+  { name: 'Mission', description_good: 'We know exactly why we are here, and we are really excited about it', description_bad: 'We have no idea why we are here, there is no clear mission' },
+  { name: 'Fun', description_good: 'We love going to work, and have great fun working together', description_bad: 'Boooooring' },
+  { name: 'Learning', description_good: "We're learning lots of interesting stuff all the time!", description_bad: 'We never have time to learn anything' },
+  { name: 'Support', description_good: 'We always get great support & help when we ask for it!', description_bad: "We keep getting stuck because we can't get the support & help we ask for" },
+  { name: 'Pawns or Players', description_good: 'We are in control of our destiny! We decide what to build and how to build it', description_bad: 'We are just pawns in a game of chess, with no influence over what we build or how we build it' },
+]
+
 const emptyMetric = (): MetricFormState => ({
   name: '',
   description_good: '',
@@ -18,7 +31,7 @@ export function CreateTemplate() {
   const navigate = useNavigate()
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
-  const [metrics, setMetrics] = useState<MetricFormState[]>([emptyMetric()])
+  const [metrics, setMetrics] = useState<MetricFormState[]>([])
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -26,8 +39,18 @@ export function CreateTemplate() {
     setMetrics([...metrics, emptyMetric()])
   }
 
+  const addSpotifyMetric = (sm: MetricFormState) => {
+    if (metrics.some(m => m.name === sm.name)) return
+    setMetrics([...metrics, { ...sm }])
+  }
+
+  const addAllSpotifyMetrics = () => {
+    const existing = new Set(metrics.map(m => m.name))
+    const toAdd = SPOTIFY_METRICS.filter(sm => !existing.has(sm.name))
+    setMetrics([...metrics, ...toAdd.map(sm => ({ ...sm }))])
+  }
+
   const removeMetric = (index: number) => {
-    if (metrics.length <= 1) return
     setMetrics(metrics.filter((_, i) => i !== index))
   }
 
@@ -35,8 +58,11 @@ export function CreateTemplate() {
     setMetrics(metrics.map((m, i) => i === index ? { ...m, [field]: value } : m))
   }
 
+  const isSpotifyMetricAdded = (sm: MetricFormState) => metrics.some(m => m.name === sm.name)
+
   const isValid = () => {
     if (!name.trim()) return false
+    if (metrics.length === 0) return false
     return metrics.every(m => m.name.trim() && m.description_good.trim() && m.description_bad.trim())
   }
 
@@ -115,21 +141,72 @@ export function CreateTemplate() {
           </div>
         </div>
 
-        <div className="section-title">Metrics</div>
+        {/* Spotify Quick-Add */}
+        <div className="glass-card" style={{ marginBottom: '24px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+            <div>
+              <div style={{ fontSize: '14px', fontWeight: 600, color: 'var(--text-primary)' }}>
+                Spotify Health Check Metrics
+              </div>
+              <div style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                Click to add individual metrics or add all at once
+              </div>
+            </div>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              onClick={addAllSpotifyMetrics}
+              style={{ whiteSpace: 'nowrap' }}
+            >
+              Add All
+            </button>
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            {SPOTIFY_METRICS.map((sm) => {
+              const added = isSpotifyMetricAdded(sm)
+              return (
+                <button
+                  key={sm.name}
+                  type="button"
+                  onClick={() => !added && addSpotifyMetric(sm)}
+                  style={{
+                    padding: '6px 14px',
+                    borderRadius: '20px',
+                    border: added ? '1px solid var(--green)' : '1px solid rgba(255,255,255,0.12)',
+                    background: added ? 'rgba(34,197,94,0.15)' : 'rgba(255,255,255,0.05)',
+                    color: added ? 'var(--green)' : 'var(--text-primary)',
+                    fontSize: '13px',
+                    cursor: added ? 'default' : 'pointer',
+                    transition: 'all 0.15s ease',
+                    opacity: added ? 0.7 : 1,
+                  }}
+                >
+                  {added ? '✓ ' : '+ '}{sm.name}
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        <div className="section-title">Metrics ({metrics.length})</div>
+
+        {metrics.length === 0 && (
+          <div className="glass-card" style={{ textAlign: 'center', padding: '32px', color: 'var(--text-secondary)', marginBottom: '16px' }}>
+            No metrics added yet. Pick from Spotify metrics above or add your own below.
+          </div>
+        )}
 
         {metrics.map((metric, index) => (
           <div key={index} className="metric-form-item">
             <div className="metric-form-header">
               <span className="metric-form-number">Metric {index + 1}</span>
-              {metrics.length > 1 && (
-                <button
-                  type="button"
-                  className="btn btn-danger btn-sm"
-                  onClick={() => removeMetric(index)}
-                >
-                  Remove
-                </button>
-              )}
+              <button
+                type="button"
+                className="btn btn-danger btn-sm"
+                onClick={() => removeMetric(index)}
+              >
+                Remove
+              </button>
             </div>
 
             <div className="form-group">
@@ -178,7 +255,7 @@ export function CreateTemplate() {
           onClick={addMetric}
           style={{ marginTop: '4px', marginBottom: '24px' }}
         >
-          + Add Metric
+          + Add Custom Metric
         </button>
 
         {error && (
@@ -200,7 +277,7 @@ export function CreateTemplate() {
           className="btn btn-primary btn-lg"
           disabled={!isValid() || submitting}
         >
-          {submitting ? 'Creating...' : 'Create Template'}
+          {submitting ? 'Creating...' : `Create Template (${metrics.length} metrics)`}
         </button>
       </form>
     </div>
