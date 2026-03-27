@@ -7,16 +7,20 @@ Let AI facilitate team health checks directly in conversations — collecting vo
 ## Features
 
 - **24 MCP tools** — Full health check lifecycle: teams, templates, sessions, voting, comparison, and analysis
+- **Live web dashboard** — Dark glassmorphism React SPA with real-time WebSocket updates
+- **Radar chart** — SVG spider chart for at-a-glance team health visualization
+- **AI discussion guide** — Surfaces disagreement patterns and low scores with suggested retro questions
+- **Web voting** — Vote through the dashboard UI with metric descriptions (good/bad anchors)
+- **Anonymous voting** — Toggle per health check to strip participant names from results
+- **Spotify metric picker** — Click individual Spotify metrics or "Add All" when building custom templates
 - **Multi-user HTTP/SSE** — Multiple team members connect to a shared server, each voting independently
+- **Team trends** — Track health improvement over time with bar charts and per-metric sparklines
 - **Token-based auth** — Bearer token authentication with auto-filled participant identity
-- **State machine lifecycle** — statekit-powered transitions: open → closed → archived, with guards (can't close without votes) and reopen support
-- **Built-in Spotify template** — Ships with the original 10 Squad Health Check categories
-- **Custom templates** — Create your own health check formats
-- **Trend tracking** — Compare results across sprints, flag declining metrics
-- **AI-friendly analysis** — Structured summaries, discussion topic generation, disagreement detection
+- **State machine lifecycle** — statekit-powered transitions: open → closed → archived, with guards
+- **MCP Apps** — Interactive voting form and results heatmap rendered in Claude Desktop
 - **Structured logging** — bolt-powered JSON (prod) or colored console (dev) logging
 - **SQLite storage** — Zero-config persistence, single-file database
-- **Single binary** — No runtime dependencies, cross-platform
+- **Single binary** — 24MB binary with embedded SPA, no runtime dependencies
 
 ## Installation
 

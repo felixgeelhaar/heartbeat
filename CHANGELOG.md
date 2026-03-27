@@ -33,6 +33,16 @@
 - MCP Apps UIResource: interactive voting form and results heatmap (rendered in Claude Desktop)
 - Dashboard REST API: `/api/teams`, `/api/healthchecks`, `/api/healthchecks/{id}/results`
 - SPA embedded in binary via `embed.FS` — single binary deployment
+- Dark glassmorphism UI design (Linear/Vercel aesthetic)
+- Web-based voting with metric descriptions (good/bad anchors visible)
+- Spotify metric picker: click individual metrics or "Add All" for custom templates
+- Radar/spider chart: SVG at-a-glance visualization of all metric scores
+- AI discussion guide: surfaces disagreement patterns and low scores with suggested questions
+- Anonymous voting: toggle per health check, strips names and comments from results
+- Team health trends: bar chart + per-metric sparklines with tendency indicators
+- Comments visible in expanded metric rows
+- Participant avatars with colored initials
+- Pre-commit hooks: go fmt, go vet, go test, nox security scan, coverctl coverage
 
 ## [v0.1.1](https://github.com/FelixGeelhaar/go-teamhealthcheck/releases/tag/v0.1.1) (2020-04-14)
 

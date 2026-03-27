@@ -71,7 +71,9 @@ web/app/                           → React SPA source (Vite + TypeScript)
 
 **State machine:** Two machine configs (open→closed with hasVotes guard, closed→archived/reopened). The `Transition()` method selects the right machine based on current status.
 
-**Dashboard:** Separate HTTP server on `:3000`. React SPA built to single HTML file via vite-plugin-singlefile, embedded in Go binary via `embed.FS`. REST API + WebSocket for live updates.
+**Dashboard:** Separate HTTP server on `:3000`. React SPA (dark glassmorphism) built to single HTML file via vite-plugin-singlefile, embedded in Go binary via `embed.FS`. Features: radar chart, discussion guide, anonymous voting, web voting with metric descriptions, Spotify metric picker, team health trends, comments display. REST API + WebSocket for live updates.
+
+**HealthCheck.Anonymous:** When true, results API strips participant names and comments. Set at creation time via dashboard or MCP tool.
 
 **Storage:** SQLite via `modernc.org/sqlite`. WAL mode + busy_timeout for concurrent access. Event bus publishes after mutations.
 
