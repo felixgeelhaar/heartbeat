@@ -153,6 +153,48 @@ func TestIsPluginEnabled_EmptyConfig(t *testing.T) {
 	}
 }
 
+func TestLoad_AuthConfig(t *testing.T) {
+	content := `
+auth:
+  mode: oidc
+  oidc:
+    issuer: https://accounts.google.com
+    client_id: my-client-id
+    scopes:
+      - openid
+      - profile
+      - email
+`
+	f, err := os.CreateTemp("", "config-auth-*.yaml")
+	if err != nil {
+		t.Fatalf("create temp file: %v", err)
+	}
+	defer os.Remove(f.Name())
+	f.WriteString(content)
+	f.Close()
+
+	cfg := config.Load(f.Name())
+	if cfg.Auth.Mode != "oidc" {
+		t.Errorf("expected auth mode oidc, got %q", cfg.Auth.Mode)
+	}
+	if cfg.Auth.OIDC.Issuer != "https://accounts.google.com" {
+		t.Errorf("expected issuer, got %q", cfg.Auth.OIDC.Issuer)
+	}
+	if cfg.Auth.OIDC.ClientID != "my-client-id" {
+		t.Errorf("expected client_id, got %q", cfg.Auth.OIDC.ClientID)
+	}
+	if len(cfg.Auth.OIDC.Scopes) != 3 {
+		t.Errorf("expected 3 scopes, got %d", len(cfg.Auth.OIDC.Scopes))
+	}
+}
+
+func TestLoad_DefaultAuthMode(t *testing.T) {
+	cfg := config.Load("/nonexistent/path")
+	if cfg.Auth.Mode != "" {
+		t.Errorf("expected empty auth mode for default config, got %q", cfg.Auth.Mode)
+	}
+}
+
 func TestLoad_ReturnsDefaultForDirectory(t *testing.T) {
 	dir := t.TempDir()
 	// Pass a path that is actually a directory — ReadFile will fail.

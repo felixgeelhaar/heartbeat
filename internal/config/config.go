@@ -6,8 +6,22 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+// AuthConfig holds authentication configuration.
+type AuthConfig struct {
+	Mode string   `yaml:"mode"` // "token" (default), "oidc"
+	OIDC OIDCAuth `yaml:"oidc"`
+}
+
+// OIDCAuth holds OIDC provider settings.
+type OIDCAuth struct {
+	Issuer   string   `yaml:"issuer"`
+	ClientID string   `yaml:"client_id"`
+	Scopes   []string `yaml:"scopes"`
+}
+
 // Config holds the application configuration.
 type Config struct {
+	Auth       AuthConfig              `yaml:"auth"`
 	Plugins    map[string]PluginConfig `yaml:"plugins"`
 	WebhookURL string                  `yaml:"webhook_url"`
 }

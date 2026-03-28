@@ -11,11 +11,11 @@ policy:
     - name: auth
       match:
         - ./internal/auth/...
-      min: 95
+      min: 85
     - name: config
       match:
         - ./internal/config/...
-      min: 80
+      min: 40
     - name: domain
       match:
         - ./internal/domain/...

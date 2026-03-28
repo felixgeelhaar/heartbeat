@@ -182,18 +182,46 @@ func main() {
 			middleware.Timeout(30*time.Second),
 		)
 
-		if tokenValidator, err := auth.LoadConfig(*authConfigPath); err == nil {
-			logger.Info().Str("config", *authConfigPath).Msg("auth enabled")
+		// Configure authentication based on config mode
+		switch cfg.Auth.Mode {
+		case "oidc":
+			oidcValidator, err := auth.NewOIDCValidator(auth.OIDCConfig{
+				Issuer:   cfg.Auth.OIDC.Issuer,
+				ClientID: cfg.Auth.OIDC.ClientID,
+				Scopes:   cfg.Auth.OIDC.Scopes,
+			})
+			if err != nil {
+				logger.Fatal().Err(err).Msg("failed to initialize OIDC auth")
+			}
 			middlewares = append(middlewares,
 				middleware.Auth(
-					middleware.BearerTokenAuthenticator(tokenValidator),
+					middleware.NewOAuth2Authenticator(
+						middleware.OAuth2Config{
+							ClientID:       cfg.Auth.OIDC.ClientID,
+							RequiredScopes: cfg.Auth.OIDC.Scopes,
+						},
+						oidcValidator,
+					).Authenticate,
 					middleware.WithAuthSkipMethods("initialize", "ping"),
 				),
 			)
-		} else if !os.IsNotExist(err) {
-			logger.Warn().Err(err).Msg("failed to load auth config, running without auth")
-		} else {
-			logger.Info().Msg("no auth config found, running without auth")
+			logger.Info().Str("issuer", cfg.Auth.OIDC.Issuer).Msg("OIDC auth enabled")
+
+		default:
+			// Token-based auth (legacy)
+			if tokenValidator, err := auth.LoadConfig(*authConfigPath); err == nil {
+				logger.Info().Str("config", *authConfigPath).Msg("token auth enabled")
+				middlewares = append(middlewares,
+					middleware.Auth(
+						middleware.BearerTokenAuthenticator(tokenValidator),
+						middleware.WithAuthSkipMethods("initialize", "ping"),
+					),
+				)
+			} else if !os.IsNotExist(err) {
+				logger.Warn().Err(err).Msg("failed to load auth config, running without auth")
+			} else {
+				logger.Info().Msg("no auth config found, running without auth")
+			}
 		}
 
 		logger.Info().Str("addr", *addr).Msg("starting HTTP/SSE transport")
