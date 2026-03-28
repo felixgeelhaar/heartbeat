@@ -35,11 +35,11 @@ func (h *HealthCheck) IsVotable() bool {
 
 // HealthCheckRepository defines persistence operations for the HealthCheck aggregate.
 type HealthCheckRepository interface {
-	Create(hc *HealthCheck) error
-	FindByID(id string) (*HealthCheck, error)
-	FindAll(filter HealthCheckFilter) ([]*HealthCheck, error)
-	Update(hc *HealthCheck) error
-	Delete(id string) error
+	CreateHealthCheck(hc *HealthCheck) error
+	FindHealthCheckByID(id string) (*HealthCheck, error)
+	FindAllHealthChecks(filter HealthCheckFilter) ([]*HealthCheck, error)
+	UpdateHealthCheck(hc *HealthCheck) error
+	DeleteHealthCheck(id string) error
 }
 
 // HealthCheckFilter specifies optional criteria for listing health checks.

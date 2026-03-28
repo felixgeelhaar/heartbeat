@@ -51,6 +51,6 @@ type Vote struct {
 
 // VoteRepository defines persistence operations for votes.
 type VoteRepository interface {
-	Upsert(vote *Vote) error
-	FindByHealthCheck(healthCheckID string) ([]*Vote, error)
+	UpsertVote(vote *Vote) error
+	FindVotesByHealthCheck(healthCheckID string) ([]*Vote, error)
 }

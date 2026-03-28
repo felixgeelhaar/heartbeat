@@ -25,9 +25,9 @@ type Template struct {
 
 // TemplateRepository defines persistence operations for the Template aggregate.
 type TemplateRepository interface {
-	Create(template *Template) error
-	FindByID(id string) (*Template, error)
-	FindByName(name string) (*Template, error)
-	FindAll() ([]*Template, error)
-	Delete(id string) error
+	CreateTemplate(template *Template) error
+	FindTemplateByID(id string) (*Template, error)
+	FindTemplateByName(name string) (*Template, error)
+	FindAllTemplates() ([]*Template, error)
+	DeleteTemplate(id string) error
 }

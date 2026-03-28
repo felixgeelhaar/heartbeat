@@ -1,26 +1,23 @@
 package events
 
-import "sync"
+import (
+	"sync"
 
-// EventType identifies what changed in the store.
-type EventType string
-
-const (
-	VoteSubmitted            EventType = "vote_submitted"
-	HealthCheckCreated       EventType = "healthcheck_created"
-	HealthCheckStatusChanged EventType = "healthcheck_status_changed"
-	HealthCheckDeleted       EventType = "healthcheck_deleted"
+	"github.com/felixgeelhaar/go-teamhealthcheck/sdk"
 )
 
-// Event is a lightweight envelope carrying only IDs.
-// Dashboard clients use these IDs to refetch full state via REST endpoints.
-type Event struct {
-	Type          EventType `json:"type"`
-	HealthCheckID string    `json:"healthcheck_id"`
-	TeamID        string    `json:"team_id,omitempty"`
-	Participant   string    `json:"participant,omitempty"`
-	MetricName    string    `json:"metric_name,omitempty"`
-}
+// EventType and Event are aliased from the SDK package to avoid duplication.
+// The SDK package is the canonical source of event type definitions.
+type EventType = sdk.EventType
+type Event = sdk.Event
+
+// Re-export constants for internal use.
+const (
+	VoteSubmitted            = sdk.VoteSubmitted
+	HealthCheckCreated       = sdk.HealthCheckCreated
+	HealthCheckStatusChanged = sdk.HealthCheckStatusChanged
+	HealthCheckDeleted       = sdk.HealthCheckDeleted
+)
 
 // Listener receives events after successful store mutations.
 type Listener interface {

@@ -117,13 +117,7 @@ func main() {
 
 		if el, ok := p.(sdk.EventListener); ok {
 			bus.Subscribe(events.ListenerFunc(func(e events.Event) {
-				el.OnEvent(sdk.Event{
-					Type:          sdk.EventType(e.Type),
-					HealthCheckID: e.HealthCheckID,
-					TeamID:        e.TeamID,
-					Participant:   e.Participant,
-					MetricName:    e.MetricName,
-				})
+				el.OnEvent(e) // events.Event IS sdk.Event (type alias)
 			}))
 		}
 
@@ -274,22 +268,10 @@ type eventBusAdapter struct {
 
 func (a *eventBusAdapter) Subscribe(l sdk.EventListener) {
 	a.bus.Subscribe(events.ListenerFunc(func(e events.Event) {
-		l.OnEvent(sdk.Event{
-			Type:          sdk.EventType(e.Type),
-			HealthCheckID: e.HealthCheckID,
-			TeamID:        e.TeamID,
-			Participant:   e.Participant,
-			MetricName:    e.MetricName,
-		})
+		l.OnEvent(e) // events.Event IS sdk.Event (type alias)
 	}))
 }
 
 func (a *eventBusAdapter) Publish(e sdk.Event) {
-	a.bus.Publish(events.Event{
-		Type:          events.EventType(e.Type),
-		HealthCheckID: e.HealthCheckID,
-		TeamID:        e.TeamID,
-		Participant:   e.Participant,
-		MetricName:    e.MetricName,
-	})
+	a.bus.Publish(e) // sdk.Event IS events.Event (type alias)
 }

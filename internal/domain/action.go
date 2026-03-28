@@ -4,9 +4,9 @@ import "time"
 
 // ActionRepository defines persistence operations for actions.
 type ActionRepository interface {
-	Create(a *Action) error
-	Complete(id string) error
-	FindByHealthCheck(healthCheckID string) ([]*Action, error)
+	CreateAction(a *Action) error
+	CompleteAction(id string) error
+	FindActionsByHealthCheck(healthCheckID string) ([]*Action, error)
 }
 
 // Action represents a follow-up item from a health check discussion.

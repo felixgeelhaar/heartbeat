@@ -13,10 +13,10 @@ type Team struct {
 
 // TeamRepository defines persistence operations for the Team aggregate.
 type TeamRepository interface {
-	Create(team *Team) error
-	FindByID(id string) (*Team, error)
-	FindAll() ([]*Team, error)
-	Delete(id string) error
-	AddMember(teamID, name string) error
-	RemoveMember(teamID, name string) error
+	CreateTeam(team *Team) error
+	FindTeamByID(id string) (*Team, error)
+	FindAllTeams() ([]*Team, error)
+	DeleteTeam(id string) error
+	AddTeamMember(teamID, name string) error
+	RemoveTeamMember(teamID, name string) error
 }

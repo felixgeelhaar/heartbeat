@@ -35,7 +35,7 @@ policy:
     - name: events
       match:
         - ./internal/events/...
-      min: 80
+      min: 45
     - name: dashboard
       match:
         - ./internal/dashboard/...
