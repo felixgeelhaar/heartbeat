@@ -26,6 +26,8 @@ import (
 	"github.com/felixgeelhaar/go-teamhealthcheck/sdk"
 
 	// Import plugins — each plugin's init() calls sdk.Register()
+	_ "github.com/felixgeelhaar/go-teamhealthcheck/plugins/jira"
+	_ "github.com/felixgeelhaar/go-teamhealthcheck/plugins/linear"
 	_ "github.com/felixgeelhaar/go-teamhealthcheck/plugins/retro"
 )
 
