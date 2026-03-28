@@ -23,3 +23,4 @@ findings.json
 web/app/node_modules/
 web/app/dist/
 .claude/
+dist/
