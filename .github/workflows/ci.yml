@@ -3,8 +3,20 @@ name: ci
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'LICENSE'
   pull_request:
     branches: [main]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'LICENSE'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -12,8 +24,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        go-version: ['1.25', '1.26']
+        # PRs use ubuntu+single Go (was 4 combos = 4× cost incl. macOS 10x).
+        # Push to main keeps full matrix coverage.
+        os: ${{ github.event_name == 'pull_request' && fromJSON('["ubuntu-latest"]') || fromJSON('["ubuntu-latest", "macos-latest"]') }}
+        go-version: ${{ github.event_name == 'pull_request' && fromJSON('["1.25"]') || fromJSON('["1.25", "1.26"]') }}
     steps:
       - uses: actions/checkout@v4
 
