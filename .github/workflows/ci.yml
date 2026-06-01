@@ -42,4 +42,4 @@ jobs:
         run: go test -race -coverprofile=coverage.out ./...
 
       - name: Build
-        run: go build ./cmd/healthcheck-mcp/
+        run: go build ./cmd/heartbeat/
