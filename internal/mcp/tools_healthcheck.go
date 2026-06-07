@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	bolt "github.com/felixgeelhaar/bolt"
-	"github.com/felixgeelhaar/mcp-go"
-	"github.com/felixgeelhaar/mcp-go/middleware"
 	"github.com/google/uuid"
+	bolt "go.klarlabs.de/bolt"
+	"go.klarlabs.de/mcp"
+	"go.klarlabs.de/mcp/middleware"
 
 	"github.com/felixgeelhaar/heartbeat/internal/domain"
 	"github.com/felixgeelhaar/heartbeat/internal/storage"

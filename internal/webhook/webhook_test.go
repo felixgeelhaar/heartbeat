@@ -10,7 +10,7 @@ import (
 	"sync"
 	"testing"
 
-	bolt "github.com/felixgeelhaar/bolt"
+	bolt "go.klarlabs.de/bolt"
 
 	"github.com/felixgeelhaar/heartbeat/internal/events"
 	"github.com/felixgeelhaar/heartbeat/internal/webhook"

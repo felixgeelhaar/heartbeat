@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	bolt "github.com/felixgeelhaar/bolt"
-	"github.com/felixgeelhaar/statekit"
+	bolt "go.klarlabs.de/bolt"
+	"go.klarlabs.de/statekit"
 
 	"github.com/felixgeelhaar/heartbeat/internal/domain"
 )

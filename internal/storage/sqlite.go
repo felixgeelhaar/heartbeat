@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	bolt "github.com/felixgeelhaar/bolt"
+	bolt "go.klarlabs.de/bolt"
 	_ "modernc.org/sqlite"
 
 	"github.com/felixgeelhaar/heartbeat/internal/events"

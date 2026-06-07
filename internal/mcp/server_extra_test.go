@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	bolt "github.com/felixgeelhaar/bolt"
-	"github.com/felixgeelhaar/mcp-go/middleware"
-	"github.com/felixgeelhaar/mcp-go/testutil"
 	"github.com/google/uuid"
+	bolt "go.klarlabs.de/bolt"
+	"go.klarlabs.de/mcp/middleware"
+	"go.klarlabs.de/mcp/testutil"
 
 	"github.com/felixgeelhaar/heartbeat/internal/domain"
 	"github.com/felixgeelhaar/heartbeat/internal/lifecycle"

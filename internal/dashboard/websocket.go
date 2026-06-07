@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	bolt "github.com/felixgeelhaar/bolt"
 	"github.com/gorilla/websocket"
+	bolt "go.klarlabs.de/bolt"
 
 	"github.com/felixgeelhaar/heartbeat/internal/events"
 )

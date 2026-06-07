@@ -11,9 +11,9 @@ import (
 	"syscall"
 	"time"
 
-	bolt "github.com/felixgeelhaar/bolt"
-	"github.com/felixgeelhaar/mcp-go"
-	"github.com/felixgeelhaar/mcp-go/middleware"
+	bolt "go.klarlabs.de/bolt"
+	"go.klarlabs.de/mcp"
+	"go.klarlabs.de/mcp/middleware"
 
 	"github.com/felixgeelhaar/heartbeat/internal/auth"
 	"github.com/felixgeelhaar/heartbeat/internal/config"

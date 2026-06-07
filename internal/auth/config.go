@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/felixgeelhaar/mcp-go/middleware"
+	"go.klarlabs.de/mcp/middleware"
 )
 
 // UserInfo maps an auth token to a user's identity.

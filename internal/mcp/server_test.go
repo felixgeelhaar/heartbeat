@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	bolt "github.com/felixgeelhaar/bolt"
-	"github.com/felixgeelhaar/mcp-go/testutil"
+	bolt "go.klarlabs.de/bolt"
+	"go.klarlabs.de/mcp/testutil"
 
 	"github.com/felixgeelhaar/heartbeat/internal/lifecycle"
 	mcptools "github.com/felixgeelhaar/heartbeat/internal/mcp"

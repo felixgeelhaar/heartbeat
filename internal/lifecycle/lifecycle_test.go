@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	bolt "github.com/felixgeelhaar/bolt"
+	bolt "go.klarlabs.de/bolt"
 
 	"github.com/felixgeelhaar/heartbeat/internal/domain"
 	"github.com/felixgeelhaar/heartbeat/internal/lifecycle"

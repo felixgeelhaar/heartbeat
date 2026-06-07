@@ -143,7 +143,7 @@ When authenticated, `submit_vote` auto-fills the participant name from the token
 
 ## Health Check Lifecycle
 
-The session lifecycle is managed by a [statekit](https://github.com/felixgeelhaar/statekit) state machine:
+The session lifecycle is managed by a [statekit](https://github.com/klarlabs-studio/statekit) state machine:
 
 ```
          create              close (requires votes)        archive
@@ -255,10 +255,10 @@ The SPA only needs rebuilding when `web/app/src/` changes. The Go binary embeds 
 
 ## Built With
 
-- [mcp-go](https://github.com/felixgeelhaar/mcp-go) — MCP server framework
-- [bolt](https://github.com/felixgeelhaar/bolt) — Structured logging
-- [statekit](https://github.com/felixgeelhaar/statekit) — State machine engine
-- [fortify](https://github.com/felixgeelhaar/fortify) — Resilience middleware (via mcp-go)
+- [mcp-go](https://github.com/klarlabs-studio/mcp-go) — MCP server framework
+- [bolt](https://github.com/klarlabs-studio/bolt) — Structured logging
+- [statekit](https://github.com/klarlabs-studio/statekit) — State machine engine
+- [fortify](https://github.com/klarlabs-studio/fortify) — Resilience middleware (via mcp-go)
 
 ## Commit Convention
 

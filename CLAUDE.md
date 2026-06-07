@@ -7,9 +7,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 MCP server for running Spotify Squad Health Checks with AI agents. Supports single-user (stdio) and multi-user (HTTP/SSE) modes with token-based auth, a live web dashboard with real-time updates, and MCP Apps UI for in-client voting.
 
 Built with:
-- `github.com/felixgeelhaar/mcp-go` — MCP framework
-- `github.com/felixgeelhaar/bolt` — Structured logging
-- `github.com/felixgeelhaar/statekit` — State machine for health check lifecycle
+- `go.klarlabs.de/mcp` — MCP framework
+- `go.klarlabs.de/bolt` — Structured logging
+- `go.klarlabs.de/statekit` — State machine for health check lifecycle
 - `modernc.org/sqlite` — Pure Go SQLite
 - React + Vite — Dashboard SPA (embedded in binary)
 

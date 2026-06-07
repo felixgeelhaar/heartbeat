@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	bolt "github.com/felixgeelhaar/bolt"
-	"github.com/felixgeelhaar/mcp-go"
 	"github.com/google/uuid"
+	bolt "go.klarlabs.de/bolt"
+	"go.klarlabs.de/mcp"
 
 	"github.com/felixgeelhaar/heartbeat/internal/domain"
 	"github.com/felixgeelhaar/heartbeat/internal/storage"

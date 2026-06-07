@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	bolt "github.com/felixgeelhaar/bolt"
 	"github.com/google/uuid"
+	bolt "go.klarlabs.de/bolt"
 
 	"github.com/felixgeelhaar/heartbeat/internal/dashboard"
 	"github.com/felixgeelhaar/heartbeat/internal/domain"

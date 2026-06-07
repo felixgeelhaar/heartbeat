@@ -21,7 +21,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/felixgeelhaar/mcp-go/middleware"
+	"go.klarlabs.de/mcp/middleware"
 )
 
 // OIDCConfig holds OIDC provider configuration.

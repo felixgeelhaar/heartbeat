@@ -7,8 +7,8 @@ import (
 	"sort"
 	"strings"
 
-	bolt "github.com/felixgeelhaar/bolt"
-	"github.com/felixgeelhaar/mcp-go"
+	bolt "go.klarlabs.de/bolt"
+	"go.klarlabs.de/mcp"
 
 	"github.com/felixgeelhaar/heartbeat/internal/domain"
 	"github.com/felixgeelhaar/heartbeat/internal/storage"
